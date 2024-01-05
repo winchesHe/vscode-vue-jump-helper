@@ -1,15 +1,15 @@
 {
   "publisher": "winches",
-  "name": "<plugin-name>",
-  "displayName": "<plugin-name>",
+  "name": "vue-jump-helper",
+  "displayName": "vue-jump-helper",
   "version": "1.0.0",
   "private": true,
-  "description": "exchange selected words",
+  "description": "辅助Vue中各函数的跳转",
   "author": "winches",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/winchesHe/plugin-vscode-import-to-require.git"
+    "url": ""
   },
   "categories": [
     "Other"
@@ -23,31 +23,18 @@
     "vscode": "^1.69.0"
   },
   "activationEvents": [
-    "onCommand:<plugin-name>"
+    "onLanguage:vue"
   ],
   "contributes": {
-    "commands": [
-      {
-        "command": "<plugin-name>",
-        "title": "自动转换import 和 require"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "<plugin-name>",
-        "key": "ctrl+alt+R",
-        "mac": "cmd+shift+R",
-        "when": "editorTextFocus"
-      }
-    ],
-    "menus": {
-      "editor/context": [
-        {
-          "when": "editorFocus",
-          "command": "<plugin-name>",
-          "group": "navigation"
+    "configuration": {
+      "type": "object",
+      "title": "vue-jump-helper 配置",
+      "properties": {
+        "vue-jump-helper.webpackConfigPath": {
+          "type": "string",
+          "description": "webpack 的配置文件路径，用来读取resolve中的alias，默认获取tsconfig"
         }
-      ]
+      }
     }
   },
   "scripts": {
@@ -62,19 +49,23 @@
     "release": "bumpp && nr publish"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.40.0",
+    "@antfu/eslint-config": "^2.4.5",
     "@antfu/ni": "^0.17.2",
-    "@types/node": "^18.7.18",
+    "@types/node": "^18.19.3",
     "@types/vscode": "^1.69.0",
-    "eslint": "^8.46.0",
-    "rimraf": "^3.0.2",
-    "tsup": "^7.2.0",
-    "typescript": "^5.1.6",
-    "vite": "^3.0.4",
-    "vitest": "^0.21.0",
-    "vsce": "^2.10.0",
-    "tsx": "^3.12.7",
+    "@vue/compiler-sfc": "^3.3.13",
+    "acorn": "^8.10.0",
+    "acorn-walk": "^8.2.0",
+    "eslint": "^8.55.0",
     "lint-staged": "^13.1.2",
-    "simple-git-hooks": "^2.8.1"
+    "rimraf": "^3.0.2",
+    "simple-git-hooks": "^2.9.0",
+    "ts-morph": "^20.0.0",
+    "tsup": "^7.3.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.3.3",
+    "vite": "^3.0.4",
+    "vitest": "^0.21.1",
+    "vsce": "^2.15.0"
   }
 }
