@@ -2,7 +2,7 @@ import vscode from 'vscode'
 import { getCurPath } from '../utils'
 import { ctxData } from '..'
 
-const firstReg = /["'\s]/
+const firstReg = /[:"'\s]/
 
 /**
  * 提供本地函数this.xxx的跳转
@@ -55,7 +55,7 @@ export class AllComponentRefProvider implements vscode.DefinitionProvider {
     const result = allRefsUse.find(item => item.ref.name === document.getText(wordRange))
     if (result) {
       const startPosition = new vscode.Position(result.ref.target.start.line - 1, result.ref.target.start.column)
-      const endPosition = new vscode.Position(result.ref.target.end.line - 1, result.ref.target.end.column)
+      const endPosition = new vscode.Position(result.ref.target.end.line - 1, result.ref.target.end.column - 2)
       const linkLocation: vscode.LocationLink = {
         targetUri: vscode.Uri.file(curPath),
         targetRange: new vscode.Range(startPosition, endPosition),

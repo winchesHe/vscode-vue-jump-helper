@@ -218,7 +218,7 @@ export function getAllRefsUse(path: string) {
 
 const scriptNodeName = ['data', 'props', 'computed', 'methods']
 
-export function getAllScriptData(docSymbols = []) {
+export function getAllScriptData(docSymbols: any = []) {
   if (docSymbols.length) {
     const result = {
       data: {},
@@ -227,8 +227,9 @@ export function getAllScriptData(docSymbols = []) {
       computed: {},
       keyMap: new Map(),
     } as ScriptData
-
-    const scriptNode = findScriptNode(docSymbols[0]) as DocumentSymbol[]
+    
+    const findScriptSymbol = docSymbols.find(item => item.name === 'script')
+    const scriptNode = findScriptNode(findScriptSymbol) as DocumentSymbol[]
 
     for (const node of scriptNode) {
       result[node.name] = transformChildren(node.children)
