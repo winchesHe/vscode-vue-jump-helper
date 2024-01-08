@@ -228,7 +228,7 @@ export function getAllScriptData(docSymbols: any = []) {
       keyMap: new Map(),
     } as ScriptData
     
-    const findScriptSymbol = docSymbols.find(item => item.name === 'script')
+    const findScriptSymbol = docSymbols.find(item => item.name === 'script') || docSymbols[0]
     const scriptNode = findScriptNode(findScriptSymbol) as DocumentSymbol[]
 
     for (const node of scriptNode) {
