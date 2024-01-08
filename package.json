@@ -2,7 +2,7 @@
   "publisher": "winches",
   "name": "vue-jump-helper",
   "displayName": "vue-jump-helper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "辅助Vue中各函数的跳转",
   "author": "winches",
