@@ -46,20 +46,18 @@ function initSubscriptions(ext: ExtensionContext) {
         const curPath = getCurPath()
 
         if (!ctxData[curPath]) {
+          const ctx = new Context(ext)
+          initCtxData(ctxData, curPath, ctx)
+          await ctx.scanAlias()
+          await ctx.initParse(curPath)
+          initComponents(curPath)
+          await initRefsUseComponentsData(curPath, ext)
+        }
+        else if (ctxData[curPath].notParseComponent) {
           // 部分组件只经过initParse，具体看initRefsUseComponentsData
-          if (ctxData[curPath].notParseComponent) {
-            initComponents(curPath)
-            await initRefsUseComponentsData(curPath, ext)
-            ctxData[curPath].notParseComponent = false
-          }
-          else {
-            const ctx = new Context(ext)
-            initCtxData(ctxData, curPath, ctx)
-            await ctx.scanAlias()
-            await ctx.initParse(curPath)
-            initComponents(curPath)
-            await initRefsUseComponentsData(curPath, ext)
-          }
+          initComponents(curPath)
+          await initRefsUseComponentsData(curPath, ext)
+          ctxData[curPath].notParseComponent = false
         }
       }
     }, null, ext.subscriptions),
